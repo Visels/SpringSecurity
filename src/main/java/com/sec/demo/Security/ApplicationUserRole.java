@@ -4,18 +4,27 @@ import com.google.common.collect.Sets;
 
 import java.util.Set;
 
+import static com.sec.demo.Security.ApplicationUserPermission.*;
+
 public enum ApplicationUserRole {
 
-
+    //the student has no permissions
     STUDENT(Sets.newHashSet()),
-    ADMIN(Sets.newHashSet(ApplicationUserPermission.COURSE_READ,
-            ApplicationUserPermission.COURSE_WRITE,
-            ApplicationUserPermission.STUDENT_READ,
-            ApplicationUserPermission.STUDENT_WRITE)),
 
+    //admins are able to read and write for students and courses
+    ADMIN(Sets.newHashSet(
+            COURSE_READ,
+            COURSE_WRITE,
+            STUDENT_READ,
+            STUDENT_WRITE
+    )),
+
+
+    //admin trainees have all admin permissions apart from writing permissions
     ADMIN_TRAINEE(Sets.newHashSet(
-            ApplicationUserPermission.STUDENT_READ,
-            ApplicationUserPermission.COURSE_READ));
+            STUDENT_READ,
+            COURSE_READ
+    ));
 
 
     private final Set<ApplicationUserPermission> permission;
